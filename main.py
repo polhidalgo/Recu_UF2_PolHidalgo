@@ -1,18 +1,17 @@
-from fastapi import FastAPI
-from typing import List
+from fastapi import FastAPI, HTTPException
 from services.user import (
-    create_user
+    update_user
 )
 
 app = FastAPI()
 
 
-@app.post("/users", response_model=dict)
-async def create_user_endpoint(
-    name: str, email: str, surname: str, description: str, course: str, year: int, street: str, postal_code: int, password: str
-):
-    new_user = create_user(name, email, surname, description, course, year, street, postal_code, password)
-    return new_user
+@app.put("/users/{user_id}", response_model=dict)
+async def update_user_endpoint(user_id: int, name: str, email: str):
 
+    updated = update_user(user_id, name, email)
+    if not updated:
+        raise HTTPException(status_code=400, detail="No s’ha pogut actualitzar")
+    return updated
 
 
