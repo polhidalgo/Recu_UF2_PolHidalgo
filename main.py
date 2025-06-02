@@ -1,7 +1,8 @@
 from fastapi import FastAPI, HTTPException
 from services.user import (
     create_user,
-    get_user_by_id
+    get_user_by_id,
+    update_user
 )
 
 app = FastAPI()
@@ -21,5 +22,16 @@ async def read_user(user_id: int):
     if not user:
         raise HTTPException(status_code=404, detail="Usuari no trobat")
     return user
+
+
+
+@app.put("/users/{user_id}", response_model=dict)
+async def update_user_endpoint(user_id: int, surname: str, street: str):
+
+    updated = update_user(user_id, surname, street)
+    if not updated:
+        raise HTTPException(status_code=400, detail="No s’ha pogut actualitzar")
+    return updated
+
 
 
