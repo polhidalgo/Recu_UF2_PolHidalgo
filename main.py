@@ -1,5 +1,4 @@
 from fastapi import FastAPI
-from typing import List
 from services.user import (
     create_user
 )
