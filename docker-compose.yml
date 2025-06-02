@@ -2,9 +2,9 @@ version: '3.1'
 services:
  db:
    image: postgres:13
-   container_name: poldb
+   container_name: poldb2
    environment:
-     - POSTGRES_DB=poldb
+     - POSTGRES_DB=poldb2
      - POSTGRES_PASSWORD=admin
      - POSTGRES_USER=admin
    ports:
