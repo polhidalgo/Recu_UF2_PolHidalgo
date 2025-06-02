@@ -10,7 +10,7 @@ def user_schema(user) -> dict:
         "year":user[6],
         "street":user[7],
         "postal_code":user[8],
-        "password":user[9]
+        "password":user[9],
     }
     return response
 

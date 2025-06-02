@@ -5,8 +5,8 @@ def create_user(name: str, email: str, surname: str, description: str, course: s
     conn = config.database.connection_db()
     cursor = conn.cursor()
     try:
-        sql = "INSERT INTO users (name, surname, email, description, course, year, street, postal_code, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s) RETURNING id, name, email"
-        cursor.execute(sql, (name, surname, email, description, course, year, street, postal_code, password))
+        sql = "INSERT INTO users (name, email, surname, description, course, year, street, postal_code, password) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(sql, (name, email, surname, description, course, year, street, postal_code, password,))
         new_row = cursor.fetchone()
         conn.commit()
         return user_schema(new_row)
@@ -36,7 +36,7 @@ def update_user(surname: str, street: str, user_id:int) -> dict:
             WHERE id = %s
             RETURNING id, name, email
         """
-        cursor.execute(sql, (surname, street, user_id))
+        cursor.execute(sql, (surname, street, user_id,))
         updated_row = cursor.fetchone()
         if updated_row:
             conn.commit()
