@@ -11,7 +11,6 @@ services:
      - "5432:5432"
    volumes:
      - local_pgdata:/var/lib/postgresql/data
-     - ./initdb:/docker-entrypoint-initdb.d
  pgadmin:
    image: dpage/pgadmin4
    container_name: pg_UF3
